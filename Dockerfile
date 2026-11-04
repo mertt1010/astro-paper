@@ -1,9 +1,9 @@
 # Base stage for building the static files
-FROM node:lts AS base
+FROM node:lts-alpine AS base
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm globally (böylece corepack hatası almazsınız)
+RUN npm install -g pnpm
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
